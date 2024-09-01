@@ -1477,7 +1477,7 @@ def fill_umesh(umesh, bl_mesh):
 	bm.to_mesh(m)
 	bm.free()
 	# not sure if this is the best way to read normals
-	m.calc_normals_split()
+	# m.corner_normals()
 
 	loops = m.loops
 	num_loops = len(loops)
@@ -1991,6 +1991,8 @@ def f(value):
 
 def collect_environment(world):
 
+	if not world:
+		return
 	if not world.use_nodes:
 		return
 
@@ -2330,6 +2332,7 @@ def collect_and_save(context, args, save_path):
 
 
 	environment = collect_environment(context.scene.world)
+	# environment = collect_environment(context.world)
 
 	log.info("Collecting materials")
 	materials = datasmith_context["materials"]
